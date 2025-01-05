@@ -1,0 +1,28 @@
+.center_me {
+  min-width:150px;
+}
+
+.center-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.title {
+  font-size: 25pt;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+.form-field {
+  margin: 35px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+

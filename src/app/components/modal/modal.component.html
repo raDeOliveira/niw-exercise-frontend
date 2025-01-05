@@ -1,0 +1,19 @@
+<mat-card appearance="outlined">
+  <mat-card-header class="center-header">
+    <mat-card-title class="title">Type you information</mat-card-title>
+  </mat-card-header>
+  <mat-form-field class="form-field" appearance="outline">
+    <mat-label>Name</mat-label>
+    <input type="text" matInput [(ngModel)]="formData.name">
+  </mat-form-field>
+  <mat-form-field class="form-field" appearance="outline">
+    <mat-label>Email</mat-label>
+    <input type="text" matInput [(ngModel)]="formData.email">
+  </mat-form-field>
+</mat-card>
+<mat-dialog-actions class="modal-actions">
+      <button class="raised-button2" mat-raised-button type="submit" (click)="onCancel()">Cancel</button>
+      <button class="raised-button2" mat-raised-button type="submit" (click)="onSubmit()"
+              [disabled]="!formData.name || !formData.email">Submit
+      </button>
+</mat-dialog-actions>
