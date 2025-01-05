@@ -3,7 +3,7 @@ import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FlexModule} from "@ngbracket/ngx-layout";
 import {MatCardModule} from '@angular/material/card';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgForOf, NgIf} from "@angular/common";
+import {KeyValue, KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {MonthlyPayment} from "../../entity/monthly-payment";
 import {ApiService} from "../../service/api.service";
 import {User} from "../../entity/user";
@@ -70,7 +70,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MatHeaderCellDef,
     MatCellDef,
     MatHeaderRowDef,
-    MatRowDef
+    MatRowDef,
+    KeyValuePipe
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -101,6 +102,9 @@ export class HomeComponent implements OnInit {
     {id: 5, name: '60'},
   ];
 
+  errorMessage: string | null = null;
+
+
   constructor(private fb: FormBuilder, private apiService: ApiService, private dialog: MatDialog,
               private helperDataService: HelperDataService) {
     this.calculateForm = this.fb.group({
@@ -118,20 +122,24 @@ export class HomeComponent implements OnInit {
     } else if (this.selectedFactor === 'EXTERNAL') {
       this.monthlyPayments = this.externalMonths;
     }
-    console.log(event.value);
-    console.log(this.monthlyPayments)
   }
 
   onSubmit() {
     if (this.calculateForm.valid) {
+
+      if (this.calculateForm.value.vehiclePrice < 0 || this.calculateForm.value.vehiclePrice == 0) {
+        // this could be done with other way like a Snack message
+        alert("Vehicle price must be greater than 0");
+        return;
+      }
 
       this.apiService.postCalculation(this.calculateForm.value).subscribe((response: any) => {
         this.toPayEveryMonth = response.toPayEveryMonth;
         this.helperDataService.changeData(response);
       });
       this.showBtn = true;
-
     } else {
+      alert("Please fill all the fields");
       console.log('Form is invalid');
     }
   }
@@ -149,12 +157,17 @@ export class HomeComponent implements OnInit {
           paymentDTO: this.receivedData
         }
 
+        if (this.receivedData == null) {
+          alert("Please calculate the monthly payment first");
+          return;
+        }
+
         this.apiService.saveData(this.userData).subscribe((response: any) => {
           console.log("Response: ", response);
         });
+        alert("Data exported into 'data.csv' on server side");
+        window.location.reload();
       }
-      window.location.reload();
-
     });
   }
 

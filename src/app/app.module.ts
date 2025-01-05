@@ -10,7 +10,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ApiService} from "./service/api.service";
 import {HttpClientModule} from "@angular/common/http";
 import {MatDialogModule} from "@angular/material/dialog";
-import { ModalComponent } from './components/modal/modal.component';
+import {ModalComponent} from './components/modal/modal.component';
 import {MatButton} from "@angular/material/button";
 import {MatCard, MatCardHeader, MatCardTitle} from "@angular/material/card";
 
