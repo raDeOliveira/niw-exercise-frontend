@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="center_me">
+
+    <mat-card appearance="outlined">
+      <mat-card-header class="center-header">
+        <mat-card-title class="title">Car price simulator</mat-card-title>
+      </mat-card-header>
+      <form class="calculate_form" [formGroup]="calculateForm">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Vehicle Price</mat-label>
+          <input type="number" matInput name="vehiclePrice" id="vehiclePrice"
+                 formControlName="vehiclePrice">
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Financing factor</mat-label>
+          <mat-select (selectionChange)="onFactorChange($event)" id="financingFactor"
+                      formControlName="financingFactor">
+            <mat-option value="INTERNAL">INTERNAL</mat-option>
+            <mat-option value="EXTERNAL">EXTERNAL</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Monthly payments</mat-label>
+          <mat-select id="monthlyPayment" formControlName="monthlyPayment">
+            <mat-option *ngFor="let month of monthlyPayments" [value]="month.name">
+              {{ month.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </mat-card>
+
+    <div class="div-raised-button">
+      <button class="raised-button" mat-raised-button type="button" (click)="onSubmit()">Calculate</button>
+    </div>
+
+
+    <hr>
+    <mat-card  appearance="outlined">
+<!--    <mat-card *ngIf="showBtn" appearance="outlined">-->
+      <mat-card-header class="center-header">
+        <mat-card-title class="title">Result of simulation</mat-card-title>
+      </mat-card-header>
+
+      <div  class="mat-elevation-z8">
+        <table class="styled-table">
+          <thead>
+          <tr>
+            <th *ngFor="let data of userData">{{data}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of userData">
+            <td>{{data.name}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.name}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+
+      <div>
+        <div class="result_calculation">
+          {{ toPayEveryMonth }}
+        </div>
+
+        <div class="div-raised-button">
+          <button class="raised-button2" mat-raised-button type="submit" (click)="resetForm()">New simulation</button>
+          <button class="raised-button2" mat-raised-button type="submit" (click)="openModal()">Save data</button>
+        </div>
+      </div>
+    </mat-card>
+
+  </div>
+</div>
