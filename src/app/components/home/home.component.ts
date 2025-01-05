@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FlexModule} from "@ngbracket/ngx-layout";
 import {MatCardModule} from '@angular/material/card';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {KeyValue, KeyValuePipe, NgForOf, NgIf} from "@angular/common";
+import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {MonthlyPayment} from "../../entity/monthly-payment";
 import {ApiService} from "../../service/api.service";
 import {User} from "../../entity/user";
@@ -15,29 +15,19 @@ import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect, MatSelectChange} from "@angular/material/select";
 import {MatIcon} from "@angular/material/icon";
 import {
-  MatCell, MatCellDef,
+  MatCell,
+  MatCellDef,
   MatColumnDef,
   MatHeaderCell,
   MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef,
-  MatRow, MatRowDef,
-  MatTable, MatTableDataSource
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
+  MatTable
 } from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'}
-]
 
 @Component({
   selector: 'app-home',
@@ -101,9 +91,6 @@ export class HomeComponent implements OnInit {
     {id: 4, name: '48'},
     {id: 5, name: '60'},
   ];
-
-  errorMessage: string | null = null;
-
 
   constructor(private fb: FormBuilder, private apiService: ApiService, private dialog: MatDialog,
               private helperDataService: HelperDataService) {

@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class HelperDataService {
-  private dataSource = new BehaviorSubject<any>(null); // Initial value can be null or default data
+  private dataSource = new BehaviorSubject<any>(null);
   currentData = this.dataSource.asObservable();
 
   constructor() {}

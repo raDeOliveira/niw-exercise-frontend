@@ -36,29 +36,11 @@
       <button class="raised-button" mat-raised-button type="button" (click)="onSubmit()">Calculate</button>
     </div>
 
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
-
     <hr>
     <mat-card *ngIf="showBtn" appearance="outlined">
       <mat-card-header class="center-header">
         <mat-card-title class="title">Result of simulation</mat-card-title>
       </mat-card-header>
-
-      <h4>You simulation is based on the following data:</h4>
-      <table class="table">
-        <tr>
-          <th>Vehicle price</th>
-          <th>Financing factor</th>
-          <th>Monthly payments</th>
-        </tr>
-        <tr>
-          <td>{{ calculateForm.value.vehiclePrice }}</td>
-          <td>{{ calculateForm.value.financingFactor }}</td>
-          <td>{{ calculateForm.value.monthlyPayment }}</td>
-        </tr>
-      </table>
 
       <div>
         <div class="result_calculation">
